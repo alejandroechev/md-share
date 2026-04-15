@@ -4,32 +4,32 @@ import { MarkdownPreview } from './ui/components/MarkdownPreview'
 import { encodeMarkdown, decodeMarkdown, isOversized } from './core/url-codec'
 import { ShareIcon, DocumentPlusIcon, ClipboardDocumentCheckIcon } from './ui/components/icons'
 
-const SAMPLE_MD = `# Bienvenido a md-share
+const SAMPLE_MD = `# Welcome to md-share
 
-Escribe tu **markdown** aquí y compártelo con un enlace.
+Write your **markdown** here and share it with a link.
 
-## Características
+## Features
 
-- Soporte para Mermaid diagramas
-- Tablas y formato GFM
-- Compartir con un solo clic
+- Mermaid diagram support
+- GFM tables and formatting
+- One-click sharing
 
-## Ejemplo de diagrama
+## Diagram example
 
 \`\`\`mermaid
 graph TD
-  A[Escribir Markdown] --> B[Vista previa en vivo]
-  B --> C[Compartir enlace]
-  C --> D[Abrir en cualquier navegador]
+  A[Write Markdown] --> B[Live Preview]
+  B --> C[Share Link]
+  C --> D[Open in Any Browser]
 \`\`\`
 
-## Tabla de ejemplo
+## Table example
 
-| Característica | Estado |
-|---------------|--------|
-| Markdown      | ✅     |
-| Mermaid       | ✅     |
-| Compartir     | ✅     |
+| Feature   | Status |
+|-----------|--------|
+| Markdown  | ✅     |
+| Mermaid   | ✅     |
+| Sharing   | ✅     |
 `
 
 function loadFromHash(): string {
@@ -67,7 +67,7 @@ export default function App() {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch {
-      prompt('Copia este enlace:', url)
+      prompt('Copy this link:', url)
     }
   }, [markdown])
 
@@ -85,25 +85,25 @@ export default function App() {
           <button
             onClick={handleNew}
             className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-md hover:bg-gray-700 transition-colors"
-            title="Nuevo documento"
+            title="New document"
           >
             <DocumentPlusIcon className="w-4 h-4" />
-            <span className="hidden sm:inline">Nuevo</span>
+            <span className="hidden sm:inline">New</span>
           </button>
           <button
             onClick={handleShare}
             className="flex items-center gap-1 px-3 py-1.5 text-sm bg-blue-600 rounded-md hover:bg-blue-700 transition-colors"
-            title="Compartir enlace"
+            title="Share link"
           >
             {copied ? (
               <>
                 <ClipboardDocumentCheckIcon className="w-4 h-4" />
-                <span className="hidden sm:inline">¡Copiado!</span>
+                <span className="hidden sm:inline">Copied!</span>
               </>
             ) : (
               <>
                 <ShareIcon className="w-4 h-4" />
-                <span className="hidden sm:inline">Compartir</span>
+                <span className="hidden sm:inline">Share</span>
               </>
             )}
           </button>
@@ -113,7 +113,7 @@ export default function App() {
       {/* Size warning */}
       {sizeWarning && (
         <div className="px-4 py-2 bg-yellow-100 text-yellow-800 text-sm text-center">
-          ⚠️ El documento es grande. Es posible que algunos navegadores no soporten enlaces tan largos.
+          ⚠️ Document is very large. Some browsers may not support URLs this long.
         </div>
       )}
 
@@ -124,7 +124,7 @@ export default function App() {
         </div>
         <div className="flex-1 overflow-hidden bg-white">
           <div className="flex items-center px-3 py-2 bg-gray-50 border-b border-gray-200">
-            <span className="text-sm font-medium text-gray-600">Vista previa</span>
+            <span className="text-sm font-medium text-gray-600">Preview</span>
           </div>
           <MarkdownPreview content={markdown} />
         </div>

@@ -31,10 +31,10 @@ export function Editor({ value, onChange }: EditorProps) {
         <button
           onClick={() => fileInputRef.current?.click()}
           className="flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 px-2 py-1 rounded hover:bg-gray-200 transition-colors"
-          title="Subir archivo .md"
+          title="Upload .md file"
         >
           <ArrowUpTrayIcon className="w-4 h-4" />
-          <span className="hidden sm:inline">Subir</span>
+          <span className="hidden sm:inline">Upload</span>
         </button>
         <input
           ref={fileInputRef}
@@ -49,7 +49,7 @@ export function Editor({ value, onChange }: EditorProps) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="flex-1 w-full p-4 font-mono text-sm resize-none outline-none bg-white border-none"
-        placeholder="Escribe o pega tu markdown aquí..."
+        placeholder="Write or paste your markdown here..."
         spellCheck={false}
       />
     </div>

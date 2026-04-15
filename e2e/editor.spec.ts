@@ -7,19 +7,19 @@ test.describe('Editor', () => {
     await page.goto('/')
     
     // Check that the editor textarea contains the sample markdown
-    const textarea = page.getByPlaceholder('Escribe o pega tu markdown aquí...')
-    await expect(textarea).toContainText('# Bienvenido a md-share')
+    const textarea = page.getByPlaceholder('Write or paste your markdown here...')
+    await expect(textarea).toContainText('# Welcome to md-share')
     
     // Check that the preview pane shows the rendered content
     const preview = page.locator('.markdown-preview')
-    await expect(preview).toContainText('Bienvenido a md-share')
-    await expect(preview.locator('h1')).toContainText('Bienvenido a md-share')
+    await expect(preview).toContainText('Welcome to md-share')
+    await expect(preview.locator('h1')).toContainText('Welcome to md-share')
   })
 
   test('should update preview in real-time when typing in editor', async ({ page }) => {
     await page.goto('/')
     
-    const textarea = page.getByPlaceholder('Escribe o pega tu markdown aquí...')
+    const textarea = page.getByPlaceholder('Write or paste your markdown here...')
     const preview = page.locator('.markdown-preview')
     
     // Clear existing content
@@ -37,13 +37,13 @@ test.describe('Editor', () => {
   test('should clear editor when clicking Nuevo button', async ({ page }) => {
     await page.goto('/')
     
-    const textarea = page.getByPlaceholder('Escribe o pega tu markdown aquí...')
-    const nuevoButton = page.getByRole('button', { name: /Nuevo/i })
+    const textarea = page.getByPlaceholder('Write or paste your markdown here...')
+    const nuevoButton = page.getByRole('button', { name: /New/i })
     
     // Verify content exists initially
-    await expect(textarea).toContainText('# Bienvenido a md-share')
+    await expect(textarea).toContainText('# Welcome to md-share')
     
-    // Click Nuevo button
+    // Click New button
     await nuevoButton.click()
     
     // Verify editor is cleared
@@ -51,6 +51,6 @@ test.describe('Editor', () => {
     
     // Verify preview is also empty
     const preview = page.locator('.markdown-preview')
-    await expect(preview).not.toContainText('Bienvenido a md-share')
+    await expect(preview).not.toContainText('Welcome to md-share')
   })
 })

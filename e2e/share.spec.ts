@@ -5,8 +5,8 @@ test.describe('Share', () => {
   test('should update URL hash when clicking share button', async ({ page }) => {
     await page.goto('/')
     
-    const textarea = page.getByPlaceholder('Escribe o pega tu markdown aquí...')
-    const shareButton = page.getByRole('button', { name: /Compartir/i })
+    const textarea = page.getByPlaceholder('Write or paste your markdown here...')
+    const shareButton = page.getByRole('button', { name: /Share/i })
     
     // Clear and enter test content
     await textarea.clear()
@@ -35,7 +35,7 @@ test.describe('Share', () => {
     // Grant clipboard permissions
     await page.context().grantPermissions(['clipboard-read', 'clipboard-write'])
     
-    const shareButton = page.getByRole('button', { name: /Compartir/i })
+    const shareButton = page.getByRole('button', { name: /Share/i })
     
     // Click share button
     await shareButton.click()
@@ -43,12 +43,12 @@ test.describe('Share', () => {
     // Wait a bit for the state to update
     await page.waitForTimeout(200)
     
-    // The button should show "¡Copiado!" after clicking
+    // The button should show "Copied!" after clicking
     // Check multiple ways to find the updated text
     const buttonContent = await shareButton.innerText()
     
-    // It might just show the icon + "Copiado" text
-    if (buttonContent.includes('Copiado')) {
+    // It might just show the icon + "Copied" text
+    if (buttonContent.includes('Copied')) {
       // Good, the copy was successful
       expect(true).toBe(true)
     } else {
@@ -61,9 +61,9 @@ test.describe('Share', () => {
     // The copied state should revert after 2 seconds
     await page.waitForTimeout(2500)
     
-    // After timeout, button should be back to "Compartir"
+    // After timeout, button should be back to "Share"
     const buttonContentAfter = await shareButton.innerText()
-    expect(buttonContentAfter).toContain('Compartir')
+    expect(buttonContentAfter).toContain('Share')
   })
 
   test('should load content from URL hash when navigating', async ({ page }) => {
@@ -74,7 +74,7 @@ test.describe('Share', () => {
     await page.goto(`/#${encoded}`)
     
     // Verify editor contains the content
-    const textarea = page.getByPlaceholder('Escribe o pega tu markdown aquí...')
+    const textarea = page.getByPlaceholder('Write or paste your markdown here...')
     await expect(textarea).toContainText('Loaded from Hash')
     await expect(textarea).toContainText('This is test content loaded from the URL hash')
     
@@ -88,8 +88,8 @@ test.describe('Share', () => {
   test('should persist hash in URL after share button click', async ({ page }) => {
     await page.goto('/')
     
-    const textarea = page.getByPlaceholder('Escribe o pega tu markdown aquí...')
-    const shareButton = page.getByRole('button', { name: /Compartir/i })
+    const textarea = page.getByPlaceholder('Write or paste your markdown here...')
+    const shareButton = page.getByRole('button', { name: /Share/i })
     
     // Enter content and share
     await textarea.clear()

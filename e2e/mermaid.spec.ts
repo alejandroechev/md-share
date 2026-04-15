@@ -4,7 +4,7 @@ test.describe('Mermaid', () => {
   test('should render mermaid diagram SVG in preview', async ({ page }) => {
     await page.goto('/')
     
-    const textarea = page.getByPlaceholder('Escribe o pega tu markdown aquí...')
+    const textarea = page.getByPlaceholder('Write or paste your markdown here...')
     const preview = page.locator('.markdown-preview')
     
     // Clear existing content and enter mermaid diagram
@@ -34,7 +34,7 @@ graph TD
   test('should render multiple mermaid diagrams', async ({ page }) => {
     await page.goto('/')
     
-    const textarea = page.getByPlaceholder('Escribe o pega tu markdown aquí...')
+    const textarea = page.getByPlaceholder('Write or paste your markdown here...')
     const preview = page.locator('.markdown-preview')
     
     // Clear and enter multiple diagrams
@@ -77,7 +77,7 @@ flowchart TD
   test('should handle invalid mermaid syntax gracefully', async ({ page }) => {
     await page.goto('/')
     
-    const textarea = page.getByPlaceholder('Escribe o pega tu markdown aquí...')
+    const textarea = page.getByPlaceholder('Write or paste your markdown here...')
     const preview = page.locator('.markdown-preview')
     
     // Clear and enter invalid mermaid
@@ -103,7 +103,7 @@ this is not valid mermaid syntax }{][
   test('should re-render mermaid when diagram code changes', async ({ page }) => {
     await page.goto('/')
     
-    const textarea = page.getByPlaceholder('Escribe o pega tu markdown aquí...')
+    const textarea = page.getByPlaceholder('Write or paste your markdown here...')
     const preview = page.locator('.markdown-preview')
     
     // Enter first diagram
