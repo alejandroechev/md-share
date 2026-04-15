@@ -4,7 +4,7 @@
 
 A minimal tool that renders markdown with Mermaid diagram support and lets you share documents as self-contained URLs — no backend, no storage, everything lives in the link.
 
-**Live:** [https://alejandroechev.github.io/md-share/](https://alejandroechev.github.io/md-share/)
+**Live:** [https://tools.stormlab.app/](https://tools.stormlab.app/)
 
 ## Features
 
