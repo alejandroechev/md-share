@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { Editor } from './ui/components/Editor'
 import { MarkdownPreview } from './ui/components/MarkdownPreview'
 import { encodeMarkdown, decodeMarkdown, isOversized } from './core/url-codec'
-import { ShareIcon, DocumentPlusIcon, ClipboardDocumentCheckIcon } from './ui/components/icons'
+import { ShareIcon, DocumentPlusIcon, ClipboardDocumentCheckIcon, EyeIcon, PencilSquareIcon } from './ui/components/icons'
 
 const SAMPLE_MD = `# Welcome to md-share
 
@@ -42,6 +42,7 @@ export default function App() {
   const [markdown, setMarkdown] = useState(() => loadFromHash() || SAMPLE_MD)
   const [copied, setCopied] = useState(false)
   const [sizeWarning, setSizeWarning] = useState(false)
+  const [previewOnly, setPreviewOnly] = useState(false)
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -83,6 +84,23 @@ export default function App() {
         <h1 className="text-lg font-bold tracking-tight">md-share</h1>
         <div className="flex items-center gap-2">
           <button
+            onClick={() => setPreviewOnly(!previewOnly)}
+            className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-md hover:bg-gray-700 transition-colors"
+            title={previewOnly ? 'Show editor' : 'Full-width preview'}
+          >
+            {previewOnly ? (
+              <>
+                <PencilSquareIcon className="w-4 h-4" />
+                <span className="hidden sm:inline">Edit</span>
+              </>
+            ) : (
+              <>
+                <EyeIcon className="w-4 h-4" />
+                <span className="hidden sm:inline">Preview</span>
+              </>
+            )}
+          </button>
+          <button
             onClick={handleNew}
             className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-md hover:bg-gray-700 transition-colors"
             title="New document"
@@ -117,15 +135,19 @@ export default function App() {
         </div>
       )}
 
-      {/* Split view */}
+      {/* Split view / Full preview */}
       <div className="flex flex-1 overflow-hidden flex-col md:flex-row">
-        <div className="flex-1 border-r border-gray-200 overflow-hidden">
-          <Editor value={markdown} onChange={setMarkdown} />
-        </div>
-        <div className="flex-1 overflow-hidden bg-white">
-          <div className="flex items-center px-3 py-2 bg-gray-50 border-b border-gray-200">
-            <span className="text-sm font-medium text-gray-600">Preview</span>
+        {!previewOnly && (
+          <div className="flex-1 border-r border-gray-200 overflow-hidden">
+            <Editor value={markdown} onChange={setMarkdown} />
           </div>
+        )}
+        <div className="flex-1 overflow-hidden bg-white">
+          {!previewOnly && (
+            <div className="flex items-center px-3 py-2 bg-gray-50 border-b border-gray-200">
+              <span className="text-sm font-medium text-gray-600">Preview</span>
+            </div>
+          )}
           <MarkdownPreview content={markdown} />
         </div>
       </div>
